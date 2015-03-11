@@ -28,27 +28,60 @@
     <ion-side-menus>
       <!-- Center content -->
       <ion-side-menu-content>
-        <ion-header-bar class="bar-dark">
+        <ion-header-bar class="bar-positive">
+        <div class="buttons">
+          <button class="button button-icon icon ion-ios-minus-outline" ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></button>
+        </div>
           <h1 class="title">Flix</h1>
           <!-- New Task button-->
           <button class="button button-icon" ng-click="newTask()">
             <i class="icon ion-compose"></i>
           </button>
         </ion-header-bar>
-        <ion-content>
-        <!-- Our content -->
-          <div class="list">
-            <a ng-repeat="film in films" 
-               href="#/{{film._id}}"
-               class="item item-thumbnail-left">
 
-              <img ng-src="{{ film.poster }}">
-              <h2>{{ film.title }}</h2>
-              <h4>{{ film.year }}</h4>
-            </a>
-        </div>
+        <ion-content>
+          <ion-list show-delete="data.showDelete">
+            <ion-item ng-repeat="film in films" 
+                      item="film"
+                      href="#/film/{{film.id}}" class="item-remove-animate">
+
+              <a class="item item-thumbnail-left" href="#" style="border: none;">
+                <img ng-src="{{ film.poster }}" >
+                <h2>{{ film.title }}</h2>
+                <p>{{ film.year }}</p>
+                <small>{{ film.plot }}</small>
+              </a>
+              
+              <ion-delete-button class="ion-minus-circled" 
+                                 ng-click="onItemDelete(film)">
+              </ion-delete-button>
+            </ion-item>
+          </ion-list>
         </ion-content>
-    </ion-side-menu-content>
+    </ion-side-menu-content> <!--/center menu-->
+    <!-- Left menu -->
+    <ion-side-menu side="left">
+      <ion-header-bar class="bar-positive">
+        <h1 class="title">Search Films</h1>
+      </ion-header-bar>
+      <form ng-submit="searchMovie(film.query)">
+          <div class="list">
+          <label class="item item-input" style="margin-top:50px;">
+              <i class="icon ion-search placeholder-icon"></i>
+              <input type="text" placeholder="Type your film?" ng-model="film.query">
+          </label>
+          </div>
+          <p>{{ temp.Title }}</p>
+          <p>{{ temp.Year }}</p>
+          <p>{{ temp.Plot }}</p>
+          <div class="padding">
+            <button type="submit" class="button button-block button-positive">Search</button>
+          </div>
+          <div class="padding">
+            <button ng-click="addFilm(film.query)" class="button button-block button-positive">Add to Library</button>
+          </div>
+        </form>
+    </ion-side-menu>
     <script id="new-task.html" type="text/ng-template">
     <div class="modal">
 
@@ -61,14 +94,23 @@
       <!-- Modal content area -->
       <ion-content>
 
-        <form ng-submit="searchMovie(film.query)">
+      <form ng-submit="searchMovie(film.query)">
           <div class="list">
-            <label class="item item-input">
+          <label class="item item-input">
+              <i class="icon ion-search placeholder-icon"></i>
               <input type="text" placeholder="Type your film?" ng-model="film.query">
-            </label>
+          </label>
+          </div>
+          <span class="item" ng-if="temp">
+            <p>{{ temp.Title }}</p>
+            <p>{{ temp.Year }}</p>
+            <p>{{ temp.Plot }}</p>
+          </span>
+          <div class="padding">
+            <button type="submit" class="button button-block button-positive">Search</button>
           </div>
           <div class="padding">
-            <button type="submit" class="button button-block button-positive">Add Film</button>
+            <button ng-click="addFilm(film.query)" class="button button-block button-positive">Add to Library</button>
           </div>
         </form>
 
