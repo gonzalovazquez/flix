@@ -35,7 +35,7 @@ flix.controller('mainCtrl', ['flixService', '$scope', '$ionicModal', function(fl
 				'&language=' + convertToArray($scope.temp.Language) + 
 				'&country=' + $scope.temp.Country +
 				'&awards=' + $scope.temp.Awards + 
-				'&poster=' + $scope.temp.Poster +
+				'&poster=' + $scope.poster +
 				'&metascore=' + convertToInt($scope.temp.Metascore) +
 				'&imdbRating=' + parseFloat($scope.temp.imdbRating) +
 				'&imdbVotes=' + convertToInt($scope.temp.imdbVotes) +
@@ -60,6 +60,9 @@ flix.controller('mainCtrl', ['flixService', '$scope', '$ionicModal', function(fl
 
 			flixService.getMovie(false, data).then(function (res) {
 				$scope.temp = res.data;
+				flixService.getPoster($scope.temp.imdbID).then(function(res) {
+					$scope.poster = res.data;
+				});
 			});
 
 		};

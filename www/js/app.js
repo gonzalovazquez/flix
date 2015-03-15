@@ -5,6 +5,10 @@
 // the 2nd parameter is an array of 'requires'
 var flix = angular.module('starter', ['ionic'])
 
+.constant('API_KEY', {
+  value: 'some key'
+  })
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

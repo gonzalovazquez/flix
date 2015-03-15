@@ -1,19 +1,26 @@
-flix.service('flixService', ['$http', function($http) {
+flix.service('flixService', ['$http', 'API_KEY', function($http, API_KEY) {
 
 	var hostName = 'http://filmviz.ca/api/films';
 
 	function requestExternal(method, endpoint) {
 		return $http({
 			method: method,
-			url: 'http://www.omdbapi.com/' + endpoint,
+			url: 'http://omdbapi.com/' + endpoint,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		});
+	}
+
+	function requestImgExternal(method, id) {
+		return $http({
+			method: method,
+			url: 'http://img.omdbapi.com/?i=' + id + '&apikey=' + API_KEY.value,
 		});
 	}
 
 	function deleteExternal(method, id) {
 		return $http({
 			method: method,
-			url: hostName + '/' +id,
+			url: hostName + '/' + id,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		});
 	}
@@ -34,6 +41,10 @@ flix.service('flixService', ['$http', function($http) {
 			return requestExternal('GET', endpoint);
 		}		
 	};
+
+	this.getPoster = function(id) {
+		return requestImgExternal('GET', id);
+	}
   
 	this.saveMovie = function(data) {
 		return requestInternal('POST', data);
