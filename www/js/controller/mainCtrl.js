@@ -22,25 +22,26 @@ flix.controller('mainCtrl', ['flixService', '$scope', '$ionicModal', function(fl
 	  $scope.addFilm = function(title) {
 	  	var data, storeFilm;
 
-	  	storeFilm = 'title=' + $scope.temp.Title + 
-				'&year=' + convertToInt($scope.temp.Year) +
-				'&rated=' + $scope.temp.Rated + 
-				'&released=' + $scope.temp.Released +
-				'&runtime=' + convertToInt($scope.temp.Runtime) +
-				'&genre=' + convertToArray($scope.temp.Genre) +
-				'&director=' + $scope.temp.Director + 
-				'&write=' + convertToArray($scope.temp.Writer) +
-				'&actors=' + convertToArray($scope.temp.Actors) + 
-				'&plot=' + $scope.temp.Plot +
-				'&language=' + convertToArray($scope.temp.Language) + 
-				'&country=' + $scope.temp.Country +
-				'&awards=' + $scope.temp.Awards + 
-				'&poster=' + $scope.poster +
-				'&metascore=' + convertToInt($scope.temp.Metascore) +
-				'&imdbRating=' + parseFloat($scope.temp.imdbRating) +
-				'&imdbVotes=' + convertToInt($scope.temp.imdbVotes) +
-				'&imdbID=' + $scope.temp.imdbID +
-				'&response=' + $scope.temp.Response;
+	  	storeFilm = { title: $scope.temp.Title,
+	  				  year: convertToInt($scope.temp.Year),
+	  				  rated: $scope.temp.Rated,
+	  				  released: $scope.temp.Released,
+	  				  runtime: convertToInt($scope.temp.Runtime),
+	  				  genre: convertToArray($scope.temp.Genre),
+	  				  director: $scope.temp.Director,
+	  				  writer: convertToArray($scope.temp.Writer),
+	  				  actors: convertToArray($scope.temp.Actors),
+	  				  plot: $scope.temp.Plot,
+	  				  language: convertToArray($scope.temp.Language),
+	  				  country: $scope.temp.Country,
+	  				  awards: $scope.temp.Awards,
+	  				  poster: $scope.poster,
+	  				  metascore: convertToInt($scope.temp.Metascore),
+	  				  imdbRating: parseFloat($scope.temp.imdbRating),
+	  				  imdbVotes: convertToInt($scope.temp.imdbVotes),
+	  				  imdbID: $scope.temp.imdbID,
+	  				  response: $scope.temp.Response
+	  				};
 
 		flixService.saveMovie(storeFilm);
 

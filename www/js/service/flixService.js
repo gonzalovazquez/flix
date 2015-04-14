@@ -29,7 +29,7 @@ flix.service('flixService', ['$http', 'API_KEY', function($http, API_KEY) {
 		return $http({
 			method: method,
 			url: hostName,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin' : '*', 'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept'},
+			headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*', 'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept'},
 			data: data
 		});
 	}
